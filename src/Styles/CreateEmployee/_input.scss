@@ -1,0 +1,20 @@
+input {
+    width: 250px;
+    margin-top: 10px;
+    height: 30px;
+    border-radius: 7px;
+    border: none;
+    margin-right: 5px;
+    padding: 10px;
+    @include shadow();
+    font-size: 1em;
+}
+
+.input-error {
+    display: none;
+    color: red;
+}
+
+label, .label {
+    margin-top: 10px;
+}

@@ -1,0 +1,43 @@
+.modal {
+    display: none;
+    width: 550px;
+    height: 150px;
+    background-color: $color-1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    border-radius: 15px;
+    @include shadow();
+    cursor: pointer;
+
+    p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        font-size: 1.5em;
+        color: $color-3;
+    }
+
+    .close-btn {
+        width: 30px;
+        height: 30px;
+        background-color: $color-4;
+        border-radius: 50%;
+        position: absolute;
+        right: -5%;
+        top: 2%;
+        transform: translate(-50%,-50%);
+    }
+
+    .close-icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 1.5em;
+    }
+}
