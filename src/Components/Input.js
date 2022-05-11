@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const Input = ({id, label, type}) => {
-    const [error, setError] = useState(false)
+const Input = ({ id, label, type, regex }) => {
+	const [error, setError] = useState(false);
+	const errorStyle = {
+		border: "1px solid red",
+	};
 
-    return (
-        <React.Fragment>
-            <label htmlFor={id}>{label}</label>
-            <input id={id} type={type} onChange={(e) => e.target.value === "" ? setError(true) : setError(false)}/>
-            <span className='error'>{error ? `Please enter your ${label}` : ''}</span>
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<label htmlFor={id}>{label}</label>
+			<input
+				id={id}
+				type={type}
+				onChange={(e) =>
+					regex.test(e.target.value) ? setError(false) : setError(true)
+				}
+			/>
+			<span className="error">{error ? `Please enter your ${label}` : ""}</span>
+		</React.Fragment>
+	);
 };
 
 export default Input;

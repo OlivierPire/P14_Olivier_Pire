@@ -1,9 +1,10 @@
 import React from 'react';
+import Table from '../Components/Table';
 
 const CurrentEmployees = () => {
     return (
-        <div>
-            Current
+        <div className='current-employees'>
+            <Table />
         </div>
     );
 };

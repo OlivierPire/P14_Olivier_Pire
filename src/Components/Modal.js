@@ -3,7 +3,7 @@ import React from 'react';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { displayModal } from './DisplayModal';
 
-const Modal = () => {
+const Modal = (msg) => {
     return (
         <div className='modal'>
             <div className='close-btn' onClick={() => displayModal()}><FontAwesomeIcon icon={faXmark} className='close-icon' /></div>

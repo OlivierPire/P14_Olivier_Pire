@@ -10,9 +10,15 @@ input {
     font-size: 1em;
 }
 
-.input-error {
+.error {
+    color: rgb(230, 47, 47);
+    margin-top: 8px;
+}
+
+.date-error {
     display: none;
-    color: red;
+    color: rgb(230, 47, 47);
+    margin-top: 8px;
 }
 
 label, .label {

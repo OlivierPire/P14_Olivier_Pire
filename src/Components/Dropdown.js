@@ -11,7 +11,7 @@ const Dropdown = ({ name, id, elements, className }) => {
 			<div className="select-label">
 				{name.charAt(0).toUpperCase() + name.slice(1)}
 			</div>
-				<div className="select-bar" onClick={() => setOpen(!open)}>{elementSelected} {<FontAwesomeIcon icon={open ? faCaretUp : faCaretDown} />}
+				<div id={id} className="select-bar" onClick={() => setOpen(!open)}>{elementSelected} {<FontAwesomeIcon icon={open ? faCaretUp : faCaretDown} />}
 					<div className={open === true ? "display-list" : 'hidden-list'} >
 						{elements.map((element) => (
 							<span key={element} onClick={() => setElementSelected(element) & setOpen(false)}>{element}</span>
