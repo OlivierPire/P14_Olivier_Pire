@@ -6,11 +6,9 @@ import { departments } from "../Data/Departments";
 import Dropdown from "./Dropdown";
 import Date from "./Date";
 import { formValidator, numberRegex, stringRegex } from "./FormValidator";
-import store from "../app/store";
 
 const Form = () => {
-	const firstName = document.querySelector('#first-name')
-	console.log(store.getState().addEmployees[0])
+
 	return (
 		<div className="form">
 			<form action="#" id="create-employee">
@@ -18,11 +16,15 @@ const Form = () => {
 					<fieldset className="main-informations">
 						<legend>Main Informations</legend>
 						<Input id="first-name" label="First Name" type="text" regex={stringRegex} />
+						<span className="first-name-error error">Please, enter your first name</span>
 						<Input id="last-name" label="Last Name" type="text" regex={stringRegex} />
+						<span className="last-name-error error">Please, enter your last name</span>
 						<label htmlFor="date-of-birth">Date</label>
 						<Date className="date-of-birth" id="date-of-birth" label='Date' state='dateOfBirth'/>
+						<span className="date-of-birth-error error">Please, enter your first name</span>
 						<label htmlFor="start-date">Start Date</label>
 						<Date className='start-date' id="start-date" label='Start Date' state='startDate'/>
+						<span className="start-date error">Please, enter your first name</span>
 					</fieldset>
 					<fieldset className="address">
 						<legend>Address</legend>

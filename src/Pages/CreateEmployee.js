@@ -6,7 +6,7 @@ import Modal from '../Components/Modal';
 import '../Styles/index.scss'
 
 const CreateEmployee = () => {
-  console.log(store.getState().addEmployees.data);
+
     return (
         <div className='create-employee-container'>
           <div className='background-modal'></div>

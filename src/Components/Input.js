@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Errors from "./Errors";
 
 const Input = ({ id, label, type, regex }) => {
 	const [error, setError] = useState(false);
@@ -16,7 +17,9 @@ const Input = ({ id, label, type, regex }) => {
 					regex.test(e.target.value) ? setError(false) : setError(true)
 				}
 			/>
-			<span className="error">{error ? `Please enter your ${label}` : ""}</span>
+			<Errors content={'Please enter your ' + label} errorClassName={id + '-error'}/>
+
+			{/* <span className="error">{error ? `Please enter your ${label}` : ""}</span> */}
 		</React.Fragment>
 	);
 };

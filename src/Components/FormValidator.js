@@ -14,27 +14,21 @@ export const formValidator = () => {
 	const city = document.querySelector("#city").value;
 	const zipCode = document.querySelector("#zip-code").value;
 
-    
 	if (
-        dateOfBirth &&
-		startDate &&
-		firstName &&
-		lastName &&
-		street &&
-		city &&
-		zipCode !== ""
+        firstName && lastName && startDate && street && city && zipCode !== ''
         ) {
-        store.dispatch(
-            addNewEmployee({
-                firstName,
-                startDate,
-                lastName,
-                street,
-                city,
-                zipCode,
-                dateOfBirth,
-            })
-        );
-		displayModal();
+            store.dispatch(
+                addNewEmployee({
+                    firstName,
+                    startDate,
+                    lastName,
+                    street,
+                    city,
+                    zipCode,
+                    dateOfBirth,
+                })
+                );
+                displayModal();
+                
 	}
 };

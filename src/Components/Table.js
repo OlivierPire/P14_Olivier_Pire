@@ -61,7 +61,7 @@ const Table = () => {
 	return (
 		<div className="table">
 			<h1>Current Employees</h1>
-			<table {...getTableProps()} style={{ border: "solid 1px black" }}>
+			<table {...getTableProps()} style={{ border: "solid 1px black", margin: 'auto'}}>
 				<thead>
 					{headerGroups.map((headerGroup) => (
 						<tr {...headerGroup.getHeaderGroupProps()}>
@@ -69,10 +69,11 @@ const Table = () => {
 								<th
 									{...column.getHeaderProps()}
 									style={{
-										borderBottom: "solid 3px red",
-										background: "aliceblue",
-										color: "black",
-										fontWeight: "bold",
+										width: "10%",
+										height: '50px',
+										background: "#393E46",
+										color: "#EEEEEE",
+										fontWeight: "lighter",
 									}}
 								>
 									{column.render("Header")}
@@ -93,7 +94,7 @@ const Table = () => {
 											style={{
 												padding: "10px",
 												border: "solid 1px gray",
-												background: "papayawhip",
+												background: "#393E461c",
 											}}
 										>
 											{cell.render("Cell")}
