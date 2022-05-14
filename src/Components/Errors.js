@@ -2,7 +2,7 @@ import React from 'react';
 
 const Errors = ({content, errorClassName}) => {
     const style= {
-        display: 'none'
+        display: 'block'
     }
     return (
         <div>

@@ -8,7 +8,7 @@ const Date = ({className, id, label, state}) => {
 
     return (
         <div id={id}>
-            <DatePicker className={className} selected={startDate} onChange={(date) => setStartDate(date)} />
+            <DatePicker placeholderText={label} className={className} selected={startDate} onChange={(date) => setStartDate(date)} />
             <span className='date-error'>Please enter your {label} </span>
         </div>
     );

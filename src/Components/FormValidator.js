@@ -4,6 +4,7 @@ import { displayModal } from "./DisplayModal";
 
 export const stringRegex = /^[A-Za-z]+$/;
 export const numberRegex = /^[0-9]+$/;
+export const streetRegex = /^[0-9a-zA-Z_]+$/;
 
 export const formValidator = () => {
 	const dateOfBirth = document.querySelector(".date-of-birth").value;
@@ -13,22 +14,87 @@ export const formValidator = () => {
 	const street = document.querySelector("#street").value;
 	const city = document.querySelector("#city").value;
 	const zipCode = document.querySelector("#zip-code").value;
+	const states = document.querySelector("#states .react-select__single-value");
+	const departments = document.querySelector(
+		"#departments .react-select__single-value"
+	);
+
+	if (states == null) {
+		document.querySelector(".states-error").style.display = "block";
+	} else {
+		document.querySelector(".states-error").style.display = "none";
+	}
+
+	if (departments == null) {
+		document.querySelector(".departments-error").style.display = "block";
+	} else {
+		document.querySelector(".departments-error").style.display = "none";
+	}
+
+	if (!numberRegex.test(zipCode)) {
+		document.querySelector(".zip-code-error").style.display = "block";
+	} else {
+		document.querySelector(".zip-code-error").style.display = "none";
+	}
+
+	if (!stringRegex.test(firstName)) {
+		document.querySelector(".first-name-error").style.display = "block";
+	} else {
+		document.querySelector(".first-name-error").style.display = "none";
+	}
+
+	if (!stringRegex.test(lastName)) {
+		document.querySelector(".last-name-error").style.display = "block";
+	} else {
+		document.querySelector(".last-name-error").style.display = "none";
+	}
+
+	if (!stringRegex.test(street)) {
+		document.querySelector(".street-error").style.display = "block";
+	} else {
+		document.querySelector(".street-error").style.display = "none";
+	}
+
+	if (!stringRegex.test(city)) {
+		document.querySelector(".city-error").style.display = "block";
+	} else {
+		document.querySelector(".city-error").style.display = "none";
+	}
+
+	if (startDate === "") {
+		document.querySelector(".start-date-error").style.display = "block";
+	} else {
+		document.querySelector(".start-date-error").style.display = "none";
+	}
+
+	if (dateOfBirth === "") {
+		document.querySelector(".date-of-birth-error").style.display = "block";
+	} else {
+		document.querySelector(".date-of-birth-error").style.display = "none";
+	}
 
 	if (
-        firstName && lastName && startDate && street && city && zipCode !== ''
-        ) {
-            store.dispatch(
-                addNewEmployee({
-                    firstName,
-                    startDate,
-                    lastName,
-                    street,
-                    city,
-                    zipCode,
-                    dateOfBirth,
-                })
-                );
-                displayModal();
-                
+		stringRegex.test(firstName) &&
+		stringRegex.test(lastName) &&
+		streetRegex.test(street) &&
+		stringRegex.test(city) &&
+		numberRegex.test(zipCode) &&
+		states !== null &&
+		departments !== null &&
+        dateOfBirth !== "" &&
+        startDate !== ""
+	) {
+		store.dispatch(
+			addNewEmployee({
+				firstName,
+				lastName,
+				startDate,
+				street,
+				city,
+				zipCode,
+				dateOfBirth,
+			})
+		);
+		displayModal();
 	}
 };
