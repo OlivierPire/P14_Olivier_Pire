@@ -1,8 +1,51 @@
 .table {
-    color: black;
-    
+	color: black;
+	width: 80%;
+	margin: auto;
 
-    a {
-        color: black;
-    }
+	table {
+		width: 100%;
+	}
+
+	a {
+		color: black;
+
+        &:hover {
+            color: #00ADB5;
+        }
+	}
+
+	.header-table {
+		display: flex;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		width: 100%;
+		justify-content: space-between;
+		align-items: center;
+
+		.searchbar {
+			margin: 0;
+			width: 200px;
+			box-shadow: 0px 5px 8px 1px rgba(0,0,0,0.1);
+		}
+	}
+
+	.bottom-table {
+		margin-top: 10px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	th {
+		border-radius: 7px 7px 0px 0px;
+	}
+
+	.arrows-btn {
+        color: rgb(238, 238, 238);
+		background: #00ADB5;
+		width: 40px;
+		height: 20px;
+		border-radius: 4px;
+		border: none;
+	}
 }
