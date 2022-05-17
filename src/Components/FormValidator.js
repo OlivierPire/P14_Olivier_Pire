@@ -1,18 +1,22 @@
 import store from "../app/store";
 import { addNewEmployee } from "../features/addEmployeesSlice";
 import { displayModal } from "./DisplayModal";
-import { states } from '../Data/States'
-import { useState } from "react";
+import { states } from "../Data/States";
 
 export const stringRegex = /^[A-Za-z]+$/;
 export const numberRegex = /^[0-9]+$/;
 export const streetRegex = /^[0-9a-zA-Z_]+$/;
 
 export const formValidator = async () => {
-	const statesValue = await document.querySelector("#states .react-select__single-value");
+	const ids = []
+	const statesValue = await document.querySelector(
+		"#states .react-select__single-value"
+	);
 	let state;
-	if(statesValue) {
-		states.forEach((e) => statesValue.textContent === e.value ? state = e.abbreviation : '')
+	if (statesValue) {
+		states.forEach((e) =>
+			statesValue.textContent === e.value ? (state = e.abbreviation) : ""
+		);
 	}
 	const dateOfBirth = document.querySelector(".date-of-birth").value;
 	const startDate = document.querySelector(".start-date").value;
@@ -25,7 +29,6 @@ export const formValidator = async () => {
 		"#departments .react-select__single-value"
 	);
 
-	
 	if (statesValue == null) {
 		document.querySelector(".states-error").style.display = "block";
 	} else {
@@ -37,13 +40,13 @@ export const formValidator = async () => {
 	} else {
 		document.querySelector(".departments-error").style.display = "none";
 	}
-	
+
 	if (!numberRegex.test(zipCode)) {
 		document.querySelector(".zip-code-error").style.display = "block";
 	} else {
 		document.querySelector(".zip-code-error").style.display = "none";
 	}
-	
+
 	if (!stringRegex.test(firstName)) {
 		document.querySelector(".first-name-error").style.display = "block";
 	} else {
@@ -55,31 +58,31 @@ export const formValidator = async () => {
 	} else {
 		document.querySelector(".last-name-error").style.display = "none";
 	}
-	
+
 	if (!stringRegex.test(street)) {
 		document.querySelector(".street-error").style.display = "block";
 	} else {
 		document.querySelector(".street-error").style.display = "none";
 	}
-	
+
 	if (!stringRegex.test(city)) {
 		document.querySelector(".city-error").style.display = "block";
 	} else {
 		document.querySelector(".city-error").style.display = "none";
 	}
-	
+
 	if (startDate === "") {
 		document.querySelector(".start-date-error").style.display = "block";
 	} else {
 		document.querySelector(".start-date-error").style.display = "none";
 	}
-	
+
 	if (dateOfBirth === "") {
 		document.querySelector(".date-of-birth-error").style.display = "block";
 	} else {
 		document.querySelector(".date-of-birth-error").style.display = "none";
 	}
-	
+
 	if (
 		stringRegex.test(firstName) &&
 		stringRegex.test(lastName) &&
@@ -88,9 +91,10 @@ export const formValidator = async () => {
 		numberRegex.test(zipCode) &&
 		statesValue !== null &&
 		department !== null &&
-        dateOfBirth !== "" &&
-        startDate !== ""
+		dateOfBirth !== "" &&
+		startDate !== ""
 		) {
+
 		store.dispatch(
 			addNewEmployee({
 				firstName,
@@ -104,6 +108,23 @@ export const formValidator = async () => {
 				department: department.textContent
 			})
 		);
+
+	    
 		// displayModal();
 	}
+	if(department) {
+		localStorage.setItem('storage', JSON.stringify({addEmployees:[{
+			firstName,
+			lastName,
+			startDate,
+			street,
+			state,
+			city,
+			zipCode,
+			dateOfBirth,
+			department: department.textContent
+		}]}));
+
+	}
+	console.log('ids:', localStorage.getItem('storage'));
 };

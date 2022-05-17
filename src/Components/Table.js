@@ -6,12 +6,17 @@ import {
 	useSortBy,
 } from "react-table/dist/react-table.development";
 import store from "../app/store";
+import SearchBar from "./SearchBar";
 
 const Table = () => {
+	const a = JSON.parse(localStorage.getItem("storage"));
+
+	// console.log(a);
+	// console.log(store.getState());
 	const data = React.useMemo(
 		() =>
 			store.getState().addEmployees == null || undefined
-				? []
+				? a.addEmployees
 				: store.getState().addEmployees,
 		[]
 	);
@@ -86,32 +91,9 @@ const Table = () => {
 		<div className="table">
 			<div className="header-table">
 				<h1>Current Employees</h1>
-				<input
-					className="searchbar"
-					type="search"
-					placeholder="search in table"
-					onChange={(e) => {
-						for (
-							let i = 0;
-							i < document.querySelectorAll(".rows-content").length;
-							i++
-						) {
-							document.querySelectorAll(".rows-content")[i].childNodes.forEach((a) => {
-								a.textContent.includes(e.target.value)
-									? (document.querySelectorAll(".rows-content")[i].style.display =
-											"none")
-									: (document.querySelectorAll(".rows-content")[i].style.display =
-											"table-row");
-							});
-							// à revoir
-						}
-					}}
-				/>
+				<SearchBar />
 			</div>
-			<table
-				{...getTableProps()}
-				style={{ margin: "auto" }}
-			>
+			<table {...getTableProps()} style={{ margin: "auto" }}>
 				<thead>
 					{headerGroups.map((headerGroup) => (
 						<tr {...headerGroup.getHeaderGroupProps()}>
@@ -163,9 +145,20 @@ const Table = () => {
 				<div>
 					Showing {pageSize} of {rows.length} results
 				</div>
-				<NavLink to="/">Home</NavLink>	
+				<NavLink to="/">Home</NavLink>
 				<div className="pagination">
-					<button className="arrows-btn" onClick={() => previousPage()} disabled={!canPreviousPage} style={{background: '#00ADB5', width: '40px', height: '20px', borderRadius: '4px', border: 'none'}}>
+					<button
+						className="arrows-btn"
+						onClick={() => previousPage()}
+						disabled={!canPreviousPage}
+						style={{
+							background: "#00ADB5",
+							width: "40px",
+							height: "20px",
+							borderRadius: "4px",
+							border: "none",
+						}}
+					>
 						{"<"}
 					</button>{" "}
 					<span>
@@ -174,7 +167,11 @@ const Table = () => {
 							{pageIndex + 1} / {pageOptions.length}
 						</strong>{" "}
 					</span>
-					<button className="arrows-btn" onClick={() => nextPage()} disabled={!canNextPage}>
+					<button
+						className="arrows-btn"
+						onClick={() => nextPage()}
+						disabled={!canNextPage}
+					>
 						{">"}
 					</button>{" "}
 					<select
