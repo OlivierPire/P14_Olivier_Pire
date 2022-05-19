@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "./Input";
 import { displayModal } from "./DisplayModal";
 import { states } from "../Data/States";
@@ -6,8 +6,14 @@ import { departments } from "../Data/Departments";
 import Date from "./Date";
 import { formValidator, numberRegex, streetRegex, stringRegex } from "./FormValidator";
 import ReactSelect from "react-select";
+import Modal from "modal-p14-olivier";
 
 const Form = () => {
+	useEffect(() => {
+		document.querySelector('.modal-close-icon').addEventListener('click', () =>  {
+			document.querySelector('.background-modal').style.display = 'none'
+		})
+	})
 	return (
 		<div className="form">
 			<form action="#" id="create-employee">
@@ -94,8 +100,8 @@ const Form = () => {
 					})}
 				/>
 				<span className="departments-error error label-dp">Please, select your departments</span>
-
 			</form>
+			<Modal content='Employee created' />
 			<button className="submit" onClick={() => formValidator()}>
 				Save
 			</button>

@@ -8,12 +8,15 @@ import '../Styles/index.scss'
 const CreateEmployee = () => {
 
     return (
+      <div>
+        <div className='background-modal'></div>
         <div className='create-employee-container'>
-          <div className='background-modal'></div>
           <Header /> 
           <Form /> 
           <Modal />
         </div>
+
+      </div>
     );
 };
 

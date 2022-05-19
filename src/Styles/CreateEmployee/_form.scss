@@ -63,15 +63,7 @@
         .address {
             display: flex;
             flex-direction: column;
-            width: 200px;
-        }
-
-        select {
-            width: 250px;
-            margin-top: 10px;
-            height: 30px;
-            border-radius: 7px;
-            @include shadow();
+            width: auto;
         }
     }
 
@@ -79,6 +71,10 @@
         label {
             margin-top: 10px;
         }
+    }
+
+    .modal-container {
+        display: none;
     }
 
 }
@@ -131,5 +127,27 @@
             border-radius: 5px;
             background-color: #00acb5a4;
         }
+    }
+}
+
+@media screen and (max-width:680px) {
+    .form {
+        form {
+            width: 95%;
+        }
+    }
+}
+
+@media screen and (max-width:580px) {
+    .inputs-block {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-informations {        
+        text-align: center;
+    }
+    .address {
+        margin-top: 20px;
+        text-align: center;
     }
 }

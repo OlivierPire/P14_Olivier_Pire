@@ -9,15 +9,9 @@ import store from "../app/store";
 import SearchBar from "./SearchBar";
 
 const Table = () => {
-	const a = JSON.parse(localStorage.getItem("storage"));
-
-	// console.log(a);
-	// console.log(store.getState());
+	const storage = JSON.parse(localStorage.getItem("storage"));
 	const data = React.useMemo(
-		() =>
-			store.getState().addEmployees == null || undefined
-				? a.addEmployees
-				: store.getState().addEmployees,
+		() => (store.getState().addEmployees == null || undefined ? [] : storage),
 		[]
 	);
 
@@ -112,8 +106,17 @@ const Table = () => {
 									<span>
 										{column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
 									</span>
+									{/* {console.log(headerGroup.headers.forEach((e) => e.Header == "First Name" ? e.toggleHidden() : ''))} */}
+									{/* {console.log(headerGroup.headers.forEach((e) => console.log(e)))} */}
 								</th>
 							))}
+							{window.addEventListener("resize", () => {
+								if (window.innerWidth < 700) {
+									headerGroup.headers.forEach((e) =>
+										e.Header === "First Name" ? e.toggleHidden(true) : null
+									)
+								}
+							})}
 						</tr>
 					))}
 				</thead>
@@ -143,7 +146,7 @@ const Table = () => {
 			</table>
 			<div className="bottom-table">
 				<div>
-					Showing {pageSize} of {rows.length} results
+					Showing {rows.length} of {rows.length} results
 				</div>
 				<NavLink to="/">Home</NavLink>
 				<div className="pagination">
