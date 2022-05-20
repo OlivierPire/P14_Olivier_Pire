@@ -1,10 +1,10 @@
 .table {
 	color: black;
-	width: 80%;
+	width: 1200px;
 	margin: auto;
 
 	table {
-		width: 100%;
+		width: 1200px;
 	}
 
 	a {
@@ -50,3 +50,65 @@
 		border: none;
 	}
 }
+
+@media screen and (max-width: 1250px) {
+	.responsive-version {
+		width: 800px;
+		margin: auto;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
+
+	.table {
+		width: 800px;
+	}
+	
+}
+
+@media screen and (max-width: 830px) {
+	.responsive-version {
+		width: 500px;
+	}
+
+	.table {
+		width: 500px;
+	}
+	
+}
+
+@media screen and (max-width: 580px) {
+	.responsive-version {
+		width: 400px;
+		border: 1px solid #151616;
+		border-radius: 7px;
+	}
+
+	.table {
+		width: 500px;
+		
+		.header-table {
+			flex-direction: column;
+			margin-bottom: 8px;
+
+			h1 {
+				margin-bottom: 10px;
+			}
+
+			input {
+				text-align: center;
+			}
+		}
+
+		.bottom-table {
+			flex-direction: column-reverse;
+			align-items: center;
+		}
+
+		select {
+			display: none;
+		}
+	}
+	
+}
+
+

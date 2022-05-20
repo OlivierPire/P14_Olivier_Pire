@@ -3,7 +3,7 @@ import CreateEmployee from "./Pages/CreateEmployee";
 import CurrentEmployees from "./Pages/CurrentEmployees"
 import NotFound from "./Pages/NotFound";
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>

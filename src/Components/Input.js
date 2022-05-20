@@ -17,9 +17,6 @@ const Input = ({ id, label, type, regex }) => {
 				placeholder={label}
 			/>
 			{error ? <Errors content={'Please enter your ' + label} errorClassName={id + '-error'}/> : ''}
-			
-
-			{/* <span className="error">{error ? `Please enter your ${label}` : ""}</span> */}
 		</React.Fragment>
 	);
 };

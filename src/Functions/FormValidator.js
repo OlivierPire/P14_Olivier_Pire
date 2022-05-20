@@ -1,5 +1,5 @@
 import store from "../app/store";
-import { addNewEmployee } from "../features/addEmployeesSlice";
+import reducer, { ADD_EMPLOYEE } from "../features/addEmployeesSlice";
 import { displayModal } from "./DisplayModal";
 import { states } from "../Data/States";
 
@@ -8,7 +8,6 @@ export const numberRegex = /^[0-9]+$/;
 export const streetRegex = /^[0-9a-zA-Z_]+$/;
 
 export const formValidator = async () => {
-	const ids = [];
 	const statesValue = await document.querySelector(
 		"#states .react-select__single-value"
 	);
@@ -95,7 +94,7 @@ export const formValidator = async () => {
 		startDate !== ""
 	) {
 		store.dispatch(
-			addNewEmployee({
+			ADD_EMPLOYEE([{
 				firstName,
 				lastName,
 				startDate,
@@ -105,34 +104,34 @@ export const formValidator = async () => {
 				zipCode,
 				dateOfBirth,
 				department: department.textContent,
-			})
+			}])
 		);
 
-		let data = {
-			firstName,
-				lastName,
-				startDate,
-				street,
-				state,
-				city,
-				zipCode,
-				dateOfBirth,
-				department: department.textContent,
-		}
+		// let data = {
+		// 	firstName,
+		// 		lastName,
+		// 		startDate,
+		// 		street,
+		// 		state,
+		// 		city,
+		// 		zipCode,
+		// 		dateOfBirth,
+		// 		department: department.textContent,
+		// }
 
-		let ls = localStorage.getItem('storage')
+		// let ls = localStorage.getItem('storage')
 
-		if(ls) {
-			ls = JSON.parse(ls).concat(store.getState().addEmployees)
-		} else {
-			ls = []
-		}
+		// if(ls) {
+		// 	ls = JSON.parse(ls).concat(store.getState().addEmployees)
+		// } else {
+		// 	ls = []
+		// }
 	
-		// ls.push(data)
-		localStorage.setItem(
-			"storage",
-			JSON.stringify(ls)
-		);
+		// // ls.push(data)
+		// localStorage.setItem(
+		// 	"storage",
+		// 	JSON.stringify(ls)
+		// );
 
 		displayModal();
 	}

@@ -35,7 +35,7 @@ a {
     margin: 20px auto 20px auto;
     position: relative;
     background-color: $color-3;
-    border-radius: 40px;
+    border-radius: 10px;
     width: 40%;
     min-width: 600px;
     @include shadow()
@@ -50,6 +50,7 @@ a {
     left: 0;
     background: #000000ba;
     z-index: 2;
+    border-radius: 10px;
 }
 
 @media screen and (max-width:680px) {
@@ -61,7 +62,5 @@ a {
         background-color: transparent;
         box-shadow: none;
     }
-    body {
-        background-color: $color-3;
-    }
+    
 }

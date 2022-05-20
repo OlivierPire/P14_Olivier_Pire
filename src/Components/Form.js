@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import Input from "./Input";
-import { displayModal } from "./DisplayModal";
 import { states } from "../Data/States";
 import { departments } from "../Data/Departments";
 import Date from "./Date";
-import { formValidator, numberRegex, streetRegex, stringRegex } from "./FormValidator";
+import { formValidator, numberRegex, streetRegex, stringRegex } from "../Functions/FormValidator";
 import ReactSelect from "react-select";
 import Modal from "modal-p14-olivier";
 

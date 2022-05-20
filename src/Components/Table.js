@@ -9,9 +9,9 @@ import store from "../app/store";
 import SearchBar from "./SearchBar";
 
 const Table = () => {
-	const storage = JSON.parse(localStorage.getItem("storage"));
+	// const storage = JSON.parse(localStorage.getItem("storage"));
 	const data = React.useMemo(
-		() => (store.getState().addEmployees == null || undefined ? [] : storage),
+		() => (store.getState().arr == null || undefined ? [] : store.getState().arr),
 		[]
 	);
 
@@ -87,63 +87,65 @@ const Table = () => {
 				<h1>Current Employees</h1>
 				<SearchBar />
 			</div>
-			<table {...getTableProps()} style={{ margin: "auto" }}>
-				<thead>
-					{headerGroups.map((headerGroup) => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map((column) => (
-								<th
-									{...column.getHeaderProps(column.getSortByToggleProps())}
-									style={{
-										width: "10%",
-										height: "50px",
-										background: "#393E46",
-										color: "#EEEEEE",
-										fontWeight: "lighter",
-									}}
-								>
-									{column.render("Header")}
-									<span>
-										{column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
-									</span>
-									{/* {console.log(headerGroup.headers.forEach((e) => e.Header == "First Name" ? e.toggleHidden() : ''))} */}
-									{/* {console.log(headerGroup.headers.forEach((e) => console.log(e)))} */}
-								</th>
-							))}
-							{window.addEventListener("resize", () => {
-								if (window.innerWidth < 700) {
-									headerGroup.headers.forEach((e) =>
-										e.Header === "First Name" ? e.toggleHidden(true) : null
-									)
-								}
-							})}
-						</tr>
-					))}
-				</thead>
-				<tbody {...getTableBodyProps()}>
-					{page.map((row, i) => {
-						prepareRow(row);
-						return (
-							<tr className="rows-content" {...row.getRowProps()}>
-								{row.cells.map((cell) => {
-									return (
-										<td
-											{...cell.getCellProps()}
-											style={{
-												padding: "10px",
-												border: "solid 1px gray",
-												background: "#393E461c",
-											}}
-										>
-											{cell.render("Cell")}
-										</td>
-									);
-								})}
+			<div className="responsive-version">
+				<table {...getTableProps()} style={{ margin: "auto" }}>
+					<thead>
+						{headerGroups.map((headerGroup) => (
+							<tr {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map((column) => (
+									<th
+										{...column.getHeaderProps(column.getSortByToggleProps())}
+										style={{
+											width: "10%",
+											height: "50px",
+											background: "#393E46",
+											color: "#EEEEEE",
+											fontWeight: "lighter",
+										}}
+									>
+										{column.render("Header")}
+										<span>
+											{column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+										</span>
+										{/* {console.log(headerGroup.headers.forEach((e) => e.Header == "First Name" ? e.toggleHidden() : ''))} */}
+										{/* {console.log(headerGroup.headers.forEach((e) => console.log(e)))} */}
+									</th>
+								))}
+								{/* {window.addEventListener("resize", () => {
+									if (window.innerWidth < 700) {
+										headerGroup.headers.forEach((e) =>
+											e.Header === "First Name" ? e.toggleHidden(true) : null
+										)
+									}
+								})} */}
 							</tr>
-						);
-					})}
-				</tbody>
-			</table>
+						))}
+					</thead>
+					<tbody {...getTableBodyProps()}>
+						{page.map((row, i) => {
+							prepareRow(row);
+							return (
+								<tr className="rows-content" {...row.getRowProps()}>
+									{row.cells.map((cell) => {
+										return (
+											<td
+												{...cell.getCellProps()}
+												style={{
+													padding: "10px",
+													border: "solid 1px gray",
+													background: "#393E461c",
+												}}
+											>
+												{cell.render("Cell")}
+											</td>
+										);
+									})}
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
 			<div className="bottom-table">
 				<div>
 					Showing {rows.length} of {rows.length} results
@@ -165,7 +167,7 @@ const Table = () => {
 						{"<"}
 					</button>{" "}
 					<span>
-						Page{" "}
+						{" "}
 						<strong>
 							{pageIndex + 1} / {pageOptions.length}
 						</strong>{" "}

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { displayModal } from './DisplayModal';
+import { displayModal } from '../Functions/DisplayModal';
 
 const Modal = (msg) => {
     return (
