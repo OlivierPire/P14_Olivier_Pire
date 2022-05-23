@@ -1,26 +1,37 @@
 .not-found {
-    height: 500px;
+    height: 100%;
     width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $color-3;
+    position: absolute;
+    background-color: #393E46;
+
+    .warning-icon {
+        font-size: 6em;
+        margin-bottom: 50px;
+    }
+
     h1 {
         color: $color-4;
         font-size: 3.5em;
         margin-bottom: 50px;
     }
+
     h2 {
         font-size: 2em;
     }
 
     a {
-        position: absolute;
-        bottom: 0;
+        margin-top: 150px;
         margin-bottom: 50px;
         font-size: 1.3em;
         color: rgb(230, 230, 230);
+
+        &:hover {
+            color: $color-4;
+        }
     }
 }

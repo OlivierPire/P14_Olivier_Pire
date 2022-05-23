@@ -1,13 +1,20 @@
-import React from "react";
-import store, { persistor } from "../app/store";
+import React, { Suspense } from "react";
+import { persistor } from "../app/store";
 import { changeBackground } from "../Functions/ChangeBackground";
-import Form from "../Components/Form";
-import Header from "../Components/Header";
-import Modal from "../Components/Modal";
 import "../Styles/index.scss";
+const Form = React.lazy(() => import("../Components/Form"));
+const Header = React.lazy(() => import("../Components/Header"));
+
+/**
+ * It's the CreateEmployee page (Homepage)
+ * @returns {React.ReactElement}
+ */
 
 const CreateEmployee = () => {
 	// persistor.purge()
+
+	// I use window.innerWidth to change background color when the user window width is smaller than 681px
+	// I use it on page load and on resize with eventListener
 	if (window.innerWidth < 681) {
 		changeBackground();
 	} else {
@@ -26,9 +33,10 @@ const CreateEmployee = () => {
 		<div>
 			<div className="create-employee-container">
 				<div className="background-modal"></div>
-				<Header />
-				<Form />
-				<Modal />
+				<Suspense>
+					<Header />
+					<Form />
+				</Suspense>
 			</div>
 		</div>
 	);

@@ -8,8 +8,12 @@ import {
 import store from "../app/store";
 import SearchBar from "./SearchBar";
 
+/**
+ * I use react-table plugin for show employees datas
+ * @returns {React.ReactElement} react-table
+ */
+
 const Table = () => {
-	// const storage = JSON.parse(localStorage.getItem("storage"));
 	const data = React.useMemo(
 		() => (store.getState().arr == null || undefined ? [] : store.getState().arr),
 		[]
@@ -27,7 +31,7 @@ const Table = () => {
 			},
 			{
 				Header: "Start Date",
-				accessor: "startDate", // accessor is the "key" in the data
+				accessor: "startDate",
 			},
 			{
 				Header: "Department",
@@ -35,7 +39,7 @@ const Table = () => {
 			},
 			{
 				Header: "Date of Birth",
-				accessor: "dateOfBirth", // accessor is the "key" in the data
+				accessor: "dateOfBirth",
 			},
 			{
 				Header: "Street",
@@ -43,7 +47,7 @@ const Table = () => {
 			},
 			{
 				Header: "City",
-				accessor: "city", // accessor is the "key" in the data
+				accessor: "city",
 			},
 			{
 				Header: "State",
@@ -51,7 +55,7 @@ const Table = () => {
 			},
 			{
 				Header: "Zip Code",
-				accessor: "zipCode", // accessor is the "key" in the data
+				accessor: "zipCode",
 			},
 		],
 		[]
@@ -67,8 +71,6 @@ const Table = () => {
 		canPreviousPage,
 		canNextPage,
 		pageOptions,
-		pageCount,
-		gotoPage,
 		nextPage,
 		previousPage,
 		setPageSize,
@@ -79,8 +81,6 @@ const Table = () => {
 		usePagination
 	);
 
-	const firstPageRows = rows.slice(0, 10);
-	// console.log(prepareRow.length);
 	return (
 		<div className="table">
 			<div className="header-table">
@@ -107,22 +107,13 @@ const Table = () => {
 										<span>
 											{column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
 										</span>
-										{/* {console.log(headerGroup.headers.forEach((e) => e.Header == "First Name" ? e.toggleHidden() : ''))} */}
-										{/* {console.log(headerGroup.headers.forEach((e) => console.log(e)))} */}
 									</th>
 								))}
-								{/* {window.addEventListener("resize", () => {
-									if (window.innerWidth < 700) {
-										headerGroup.headers.forEach((e) =>
-											e.Header === "First Name" ? e.toggleHidden(true) : null
-										)
-									}
-								})} */}
 							</tr>
 						))}
 					</thead>
 					<tbody {...getTableBodyProps()}>
-						{page.map((row, i) => {
+						{page.map((row) => {
 							prepareRow(row);
 							return (
 								<tr className="rows-content" {...row.getRowProps()}>
@@ -148,7 +139,7 @@ const Table = () => {
 			</div>
 			<div className="bottom-table">
 				<div>
-					Showing {rows.length} of {rows.length} results
+					Showing {page.length} of {rows.length} results
 				</div>
 				<NavLink to="/">Home</NavLink>
 				<div className="pagination">

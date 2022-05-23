@@ -1,6 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
-import produce from "immer";
 import { PURGE } from "redux-persist";
+
+/**
+ * ADD_EMPLOYEE is action for add employee in the table
+ * @param {string} firstName 
+ * @param {string} lastName 
+ * @param {string || number} street 
+ * @param {string} city 
+ * @param {number} dateOfBirth 
+ * @param {number} startDate 
+ * @param {string} departments 
+ * @returns 
+ */
 
 export const ADD_EMPLOYEE = (
 	firstName,
@@ -22,7 +32,8 @@ export const ADD_EMPLOYEE = (
 		departments,
 	},
 });
-const initialState = { arr:[]};
+
+const initialState = { arr:[] };
 
 const reducer = (state = initialState, action) => {
 		switch(action.type) {
@@ -39,15 +50,3 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
-// const addEmployeesSlice = createSlice({
-// 	name: "addEmployees",
-// 	initialState: [],
-// 	reducers: {
-// 		addNewEmployee: (state, action) => {
-// 			state.push(action.payload);
-// 		},
-// 	},
-// });
-
-// export const { addNewEmployee } = addEmployeesSlice.actions;
-// export default addEmployeesSlice.reducer;

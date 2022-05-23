@@ -3,16 +3,26 @@ import Input from "./Input";
 import { states } from "../Data/States";
 import { departments } from "../Data/Departments";
 import Date from "./Date";
-import { formValidator, numberRegex, streetRegex, stringRegex } from "../Functions/FormValidator";
+import {
+	formValidator,
+	numberRegex,
+	streetRegex,
+	stringRegex,
+} from "../Functions/FormValidator";
 import ReactSelect from "react-select";
 import Modal from "modal-p14-olivier";
 
+/**
+ * The form with each elements
+ * @returns {React.ReactElement}
+ */
+
 const Form = () => {
 	useEffect(() => {
-		document.querySelector('.modal-close-icon').addEventListener('click', () =>  {
-			document.querySelector('.background-modal').style.display = 'none'
-		})
-	})
+		document.querySelector(".modal-close-icon").addEventListener("click", () => {
+			document.querySelector(".background-modal").style.display = "none";
+		});
+	});
 	return (
 		<div className="form">
 			<form action="#" id="create-employee">
@@ -80,7 +90,9 @@ const Form = () => {
 						<span className="zip-code-error error">Please, enter your zip code</span>
 					</fieldset>
 				</div>
-				<label htmlFor="departments" className="label-dp">Departments</label>
+				<label htmlFor="departments" className="label-dp">
+					Departments
+				</label>
 				<ReactSelect
 					placeholder="Departments"
 					className="label-dp react-select-container"
@@ -98,9 +110,11 @@ const Form = () => {
 						},
 					})}
 				/>
-				<span className="departments-error error label-dp">Please, select your departments</span>
+				<span className="departments-error error label-dp">
+					Please, select your departments
+				</span>
 			</form>
-			<Modal content='Employee created' />
+			<Modal content="Employee created" /> {/** The modal display = none */}
 			<button className="submit" onClick={() => formValidator()}>
 				Save
 			</button>

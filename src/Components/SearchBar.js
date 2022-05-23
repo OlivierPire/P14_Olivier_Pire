@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * SearchBar for search in the table element
+ * @returns {React.ReactElement}
+ */
+
 const SearchBar = () => {
 	return (
 		<div>
@@ -10,12 +15,14 @@ const SearchBar = () => {
 				onChange={(e) => {
 					for (
 						let i = 0;
-						i < document.querySelectorAll(".rows-content").length;
+						i < document.querySelectorAll(".rows-content").length; // rows-content is each row in the table body
 						i++
 					) {
 						document.querySelectorAll(".rows-content")[i].childNodes.forEach((e) => {
 							return e.textContent.toLowerCase() === e.textContent.toUpperCase();
 						});
+
+						// For each row, i check if childNodes.textContent (value in each cell) matches with e.target.value (value in searchBar) and show only the matches
 						if (
 							document
 								.querySelectorAll(".rows-content")

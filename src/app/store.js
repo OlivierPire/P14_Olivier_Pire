@@ -12,13 +12,17 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
-    key: 'root',
-    version: 1,
-    storage,
-  }
+/**
+ * I use persistor for save the datas when i add an employee
+ */
 
-const persistedReducer = persistReducer(persistConfig, addEmployeesReducer)
+const persistConfig = {
+	key: "root",
+	version: 1,
+	storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, addEmployeesReducer);
 
 const store = configureStore({
 	reducer: persistedReducer,

@@ -1,8 +1,10 @@
+/**
+ * It's for responsive, the function is played when the user is in mobile
+ */
 export const changeBackground = () => {
-	console.log(window.location.pathname);
-	if(window.location.pathname !== '/') {
-		document.querySelector('body').style.background = '#EEEEEE'
+	if (window.location.pathname !== "/") {
+		document.querySelector("body").style.background = "#EEEEEE";
 	} else {
-		document.querySelector('body').style.background = '#393E46'
+		document.querySelector("body").style.background = "#393E46";
 	}
-}
+};

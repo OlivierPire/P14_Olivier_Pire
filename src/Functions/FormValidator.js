@@ -1,7 +1,11 @@
 import store from "../app/store";
-import reducer, { ADD_EMPLOYEE } from "../features/addEmployeesSlice";
+import { ADD_EMPLOYEE } from "../features/addEmployeesSlice";
 import { displayModal } from "./DisplayModal";
 import { states } from "../Data/States";
+
+/**
+ * Form Validator play when the user click on submit in form
+ */
 
 export const stringRegex = /^[A-Za-z]+$/;
 export const numberRegex = /^[0-9]+$/;
@@ -11,11 +15,11 @@ export const formValidator = async () => {
 	const statesValue = await document.querySelector(
 		"#states .react-select__single-value"
 	);
-	let state;
+	let state; // State abbreviation for push in table
 	if (statesValue) {
 		states.forEach((e) =>
 			statesValue.textContent === e.value ? (state = e.abbreviation) : ""
-		);
+		); // If statesValue(In form) matches with states.value (In datas) i push the abbreviation in state variable.
 	}
 	const dateOfBirth = document.querySelector(".date-of-birth").value;
 	const startDate = document.querySelector(".start-date").value;
@@ -94,44 +98,20 @@ export const formValidator = async () => {
 		startDate !== ""
 	) {
 		store.dispatch(
-			ADD_EMPLOYEE([{
-				firstName,
-				lastName,
-				startDate,
-				street,
-				state,
-				city,
-				zipCode,
-				dateOfBirth,
-				department: department.textContent,
-			}])
+			ADD_EMPLOYEE([
+				{
+					firstName,
+					lastName,
+					startDate,
+					street,
+					state,
+					city,
+					zipCode,
+					dateOfBirth,
+					department: department.textContent,
+				},
+			])
 		);
-
-		// let data = {
-		// 	firstName,
-		// 		lastName,
-		// 		startDate,
-		// 		street,
-		// 		state,
-		// 		city,
-		// 		zipCode,
-		// 		dateOfBirth,
-		// 		department: department.textContent,
-		// }
-
-		// let ls = localStorage.getItem('storage')
-
-		// if(ls) {
-		// 	ls = JSON.parse(ls).concat(store.getState().addEmployees)
-		// } else {
-		// 	ls = []
-		// }
-	
-		// // ls.push(data)
-		// localStorage.setItem(
-		// 	"storage",
-		// 	JSON.stringify(ls)
-		// );
 
 		displayModal();
 	}
