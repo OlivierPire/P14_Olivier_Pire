@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 /**
- * Header
+ * This is the header component
  * @returns {React.ReactElement}
  */
 

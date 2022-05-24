@@ -29,6 +29,7 @@ const Form = () => {
 				<div className="inputs-block">
 					<fieldset className="main-informations">
 						<legend>Main Informations</legend>
+
 						<Input
 							id="first-name"
 							label="First Name"
@@ -38,10 +39,12 @@ const Form = () => {
 						<span className="first-name-error error">
 							Please, enter your first name
 						</span>
+
 						<Input id="last-name" label="Last Name" type="text" regex={stringRegex} />
 						<span className="last-name-error error">
 							Please, enter your last name
 						</span>
+
 						<label htmlFor="date-of-birth">Date of birth</label>
 						<Date
 							className="date-of-birth"
@@ -52,6 +55,7 @@ const Form = () => {
 						<span className="date-of-birth-error error">
 							Please, enter your date of birth
 						</span>
+
 						<label htmlFor="start-date">Start Date</label>
 						<Date
 							className="start-date"
@@ -63,15 +67,20 @@ const Form = () => {
 							Please, enter your start date
 						</span>
 					</fieldset>
+
 					<fieldset className="address">
 						<legend>Address</legend>
+
 						<Input id="street" label="Street" type="text" regex={streetRegex} />
 						<span className="street-error error">Please, enter your street</span>
+
 						<Input id="city" label="City" type="text" regex={stringRegex} />
 						<span className="city-error error">Please, enter your city</span>
+
 						<label htmlFor="states">States</label>
 						<ReactSelect
 							id="states"
+							placeholder='States'
 							options={states}
 							className="react-select-container"
 							classNamePrefix="react-select"
@@ -86,10 +95,13 @@ const Form = () => {
 							})}
 						/>
 						<span className="states-error error">Please, select your states</span>
+
 						<Input id="zip-code" label="Zip Code" type="number" regex={numberRegex} />
 						<span className="zip-code-error error">Please, enter your zip code</span>
+
 					</fieldset>
 				</div>
+				
 				<label htmlFor="departments" className="label-dp">
 					Departments
 				</label>
@@ -113,8 +125,10 @@ const Form = () => {
 				<span className="departments-error error label-dp">
 					Please, select your departments
 				</span>
+
 			</form>
-			<Modal content="Employee created" /> {/** The modal display = none */}
+			{/** The modal display = none */}
+			<Modal content="Employee created" /> 
 			<button className="submit" onClick={() => formValidator()}>
 				Save
 			</button>

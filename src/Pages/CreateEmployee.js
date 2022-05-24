@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { persistor } from "../app/store";
 import { changeBackground } from "../Functions/ChangeBackground";
 import "../Styles/index.scss";
-const Form = React.lazy(() => import("../Components/Form"));
-const Header = React.lazy(() => import("../Components/Header"));
+import Form from "../Components/Form";
+import Header from "../Components/Header"
 
 /**
  * It's the CreateEmployee page (Homepage)
@@ -33,10 +33,8 @@ const CreateEmployee = () => {
 		<div>
 			<div className="create-employee-container">
 				<div className="background-modal"></div>
-				<Suspense>
-					<Header />
-					<Form />
-				</Suspense>
+				<Header />
+				<Form />
 			</div>
 		</div>
 	);

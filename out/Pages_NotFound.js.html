@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Pages/NotFound.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,39 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Pages/NotFound.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * 404 page
+ * @returns {React.ReactElement} 
+ */
 
-    <h3> </h3>
+const NotFound = () => {
+    return (
+        &lt;div className='not-found'>
+            &lt;FontAwesomeIcon icon={faTriangleExclamation} className='warning-icon'/>
+            &lt;h1>Page not found&lt;/h1>
+            &lt;h2>We're sorry, we couldn't find the page you requested.&lt;/h2>
+            &lt;NavLink to='/'>Click here to return to the Home Page&lt;/NavLink>
+        &lt;/div>
+    );
+};
 
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+export default NotFound;</code></pre>
+        </article>
+    </section>
 
 
 

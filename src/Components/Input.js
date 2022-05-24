@@ -3,7 +3,9 @@ import Errors from "./Errors";
 
 /**
  * Is a simple input with id, label, type of input and regex for verification.
- * @param {*} param0
+ * @param {string} id - id of input
+ * @param {string} label - label of input
+ * @param {string} type - type of input
  * @returns {React.ReactElement}
  */
 
@@ -22,6 +24,7 @@ const Input = ({ id, label, type, regex }) => {
 				}
 				placeholder={label}
 			/>
+			
 			{error ? (
 				<Errors
 					content={"Please enter your " + label}

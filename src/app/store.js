@@ -13,7 +13,8 @@ import {
 import storage from "redux-persist/lib/storage";
 
 /**
- * I use persistor for save the datas when i add an employee
+ * This is the store with redux toolkit
+ * I use a persistor for save the datas when i add an employee
  */
 
 const persistConfig = {

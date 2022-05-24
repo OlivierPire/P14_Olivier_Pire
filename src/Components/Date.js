@@ -6,9 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 
 /**
  * This component use react-datepicker for 'date of birth' and 'start date' inputs.
- * @param {string} className
- * @param {string} id
- * @param {string} label
+ * @param {string} className - className of components
+ * @param {string} id - id of components
+ * @param {string} label - label of components (date of birth or start date)
  * @returns {React.ReactElement} datepicker
  */
 

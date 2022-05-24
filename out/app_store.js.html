@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: app/store.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,60 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: app/store.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { configureStore } from "@reduxjs/toolkit";
+import addEmployeesReducer from "../features/addEmployeesSlice.js";
+import {
+	persistStore,
+	persistReducer,
+	FLUSH,
+	REHYDRATE,
+	PAUSE,
+	PERSIST,
+	PURGE,
+	REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
+/**
+ * This is the store with redux toolkit
+ * I use a persistor for save the datas when i add an employee
+ */
 
-    <h3> </h3>
+const persistConfig = {
+	key: "root",
+	version: 1,
+	storage,
+};
 
+const persistedReducer = persistReducer(persistConfig, addEmployeesReducer);
 
+const store = configureStore({
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
+	devTools:
+		window.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; window.__REDUX_DEVTOOLS_EXTENSION__(),
+});
 
+export let persistor = persistStore(store);
 
-
-
-
-
-
-
-    
-
-
-
-
-
+export default store;
+</code></pre>
+        </article>
+    </section>
 
 
 

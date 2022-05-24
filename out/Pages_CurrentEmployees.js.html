@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: Pages/CurrentEmployees.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,37 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: Pages/CurrentEmployees.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { changeBackground } from '../Functions/ChangeBackground';
+import Table from '../Components/Table';
 
+/**
+ * It's a page with all employees datas in a table
+ * @returns {React.ReactElement}
+ */
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
+const CurrentEmployees = () => {
+    changeBackground()
     
+    return (
+        &lt;div className='current-employees'>
+            &lt;Table />
+        &lt;/div>
+    );
+};
 
-
-
-
-
+export default CurrentEmployees;</code></pre>
+        </article>
+    </section>
 
 
 
