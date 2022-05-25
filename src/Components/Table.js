@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTable } from "react-table";
 import {
@@ -6,7 +6,6 @@ import {
 	useSortBy,
 } from "react-table/dist/react-table.development";
 import store from "../app/store";
-import SearchBar from "./SearchBar";
 
 /**
  * I use react-table plugin for show employees datas
@@ -14,9 +13,34 @@ import SearchBar from "./SearchBar";
  */
 
 const Table = () => {
+	/**
+	 * On change, the search bar calls handleSearch, then changes the constant 'search' with useSate, then filters the data
+	 */
+
+	const [search, setSearch] = useState("");
+	const handleSearch = (e) => {
+		setSearch(e.target.value);
+	};
+
 	const data = React.useMemo(
-		() => (store.getState().arr == null || undefined ? [] : store.getState().arr),
-		[]
+		() =>
+			store.getState().arr == null || undefined
+				? []
+				: store
+						.getState()
+						.arr.filter(
+							(item) =>
+								item.firstName.toLowerCase().includes(search.toLowerCase()) ||
+								item.lastName.toLowerCase().includes(search.toLowerCase()) ||
+								item.department.toLowerCase().includes(search.toLowerCase()) ||
+								item.state.toLowerCase().includes(search.toLowerCase()) ||
+								item.dateOfBirth.toLowerCase().includes(search.toLowerCase()) ||
+								item.startDate.toLowerCase().includes(search.toLowerCase()) ||
+								item.street.toLowerCase().includes(search.toLowerCase()) ||
+								item.city.toLowerCase().includes(search.toLowerCase()) ||
+								item.zipCode.toLowerCase().includes(search.toLowerCase())
+						),
+		[search]
 	);
 
 	const columns = React.useMemo(
@@ -85,7 +109,14 @@ const Table = () => {
 		<div className="table">
 			<div className="header-table">
 				<h1>Current Employees</h1>
-				<SearchBar />
+				<label htmlFor="search">
+					<input
+						className="searchbar"
+						type="search"
+						placeholder="search in table"
+						onChange={handleSearch}
+					/>
+				</label>
 			</div>
 			<div className="responsive-version">
 				<table {...getTableProps()} style={{ margin: "auto" }}>
