@@ -12,10 +12,6 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-/**
- * This is the store with redux toolkit
- * I use a persistor for save the datas when i add an employee
- */
 
 const persistConfig = {
 	key: "root",
@@ -25,6 +21,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, addEmployeesReducer);
 
+/**
+ * This is the store with redux toolkit
+ * I use a persistor for save the datas when i add an employee
+ */
 const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>

@@ -4,7 +4,7 @@ import { PURGE } from "redux-persist";
  * ADD_EMPLOYEE is action for add employee in the table
  * @param {string} firstName - employee's first name
  * @param {string} lastName - employee's last name
- * @param {string || number} street - employee's street
+ * @param {any} street - employee's street
  * @param {string} city - employee's city
  * @param {number} dateOfBirth - employee's date of birth
  * @param {number} startDate - employee's start date
@@ -35,6 +35,12 @@ export const ADD_EMPLOYEE = (
 
 const initialState = { arr:[] };
 
+/**
+ * It's the reducer
+ * @param {array} state initial state
+ * @param {*} action action redux
+ * @returns reducer
+ */
 const reducer = (state = initialState, action) => {
 		switch(action.type) {
 			case 'ADD_EMPLOYEE': return {

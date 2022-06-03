@@ -1,39 +1,38 @@
-import React, { useState } from "react";
-import Errors from "./Errors";
+import React from "react";
 
 /**
- * Is a simple input with id, label, type of input and regex for verification.
- * @param {string} id - id of input
- * @param {string} label - label of input
- * @param {string} type - type of input
- * @returns {React.ReactElement}
+ * It's input component
+ * @param {string} label - label
+ * @param {boolean} labelErr - label error
+ * @param {boolean} setLabelErr - set label error
+ * @param {string} setLabel - set label 
+ * @param {any} regex - regex
+ * @param {string} type - type of the input 
+ * @param {string} id - id
+ * @returns date-picker
  */
 
-const Input = ({ id, label, type, regex }) => {
-	const [error, setError] = useState(false);
-
+const Input = ({ label, labelErr, setLabelErr, setLabel, regex, type, id }) => {
 	return (
-		<React.Fragment>
-			<label htmlFor={id}>{label}</label>
-			<input
-				required
-				id={id}
-				type={type}
-				onChange={
-					(e) => (regex.test(e.target.value) ? setError(false) : setError(true)) // On change, i test if the e.target.value matches a regex in the props to display Errors component
-				}
-				placeholder={label}
-			/>
-			
-			{error ? (
-				<Errors
-					content={"Please enter your " + label}
-					errorClassName={id + "-error"}
+			<div className="input">
+				<label htmlFor={id}>{label}</label>
+				<input
+					id={id}
+					placeholder={label}
+					type={type}
+					onChange={(e) =>
+						!regex.test(e.target.value)
+							? setLabelErr(true)
+							: setLabelErr(false) & setLabel(e.target.value)
+					}
 				/>
-			) : (
-				""
-			)}
-		</React.Fragment>
+				<span
+					style={labelErr ? { display: "block" } : { display: "none" }}
+					className="error"
+				>
+					Please, enter your {label}
+				</span>
+			</div>
 	);
 };
 

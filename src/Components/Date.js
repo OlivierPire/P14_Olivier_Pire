@@ -1,31 +1,41 @@
 import React from "react";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
 import en from "date-fns/locale/en-GB";
 import "react-datepicker/dist/react-datepicker.css";
 
 /**
- * This component use react-datepicker for 'date of birth' and 'start date' inputs.
- * @param {string} className - className of components
- * @param {string} id - id of components
- * @param {string} label - label of components (date of birth or start date)
- * @returns {React.ReactElement} datepicker
+ * It's react date-picker
+ * @param {string} label - label
+ * @param {string} id - id
+ * @param {number} setLabel - set Label change with useState
+ * @param {boolean} labelErr - label Error
+ * @param {*} state - state of teh date
+ * @param {boolean} setLabelErr - set label Error
+ * @returns date-picker
  */
 
-const Date = ({ className, id, label }) => {
-	const [startDate, setStartDate] = useState();
-
+const Date = ({ label, id, setLabel, labelErr, state, setLabelErr }) => {
 	return (
-		<div id={id}>
+		<React.Fragment>
+			<label htmlFor={label}>{label}</label>
 			<DatePicker
+				className="date-picker"
 				placeholderText={label}
-				className={className}
-				selected={startDate}
-				onChange={(date) => setStartDate(date)}
+				id={id}
+				selected={state}
+				onChange={(date) =>
+					setLabel(date) & (date !== "") ? setLabelErr(false) : null
+				}
 				locale={en}
+				dateFormat="dd/MM/yyyy"
 			/>
-			<span className="date-error">Please enter your {label} </span>
-		</div>
+			<span
+				style={labelErr ? { display: "block" } : { display: "none" }}
+				className="error"
+			>
+				Please, enter your {label}
+			</span>
+		</React.Fragment>
 	);
 };
 

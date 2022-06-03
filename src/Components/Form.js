@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
-import Input from "./Input";
+import React, { useEffect, useState } from "react";
 import { states } from "../Data/States";
 import { departments } from "../Data/Departments";
-import Date from "./Date";
-import {
-	formValidator,
-	numberRegex,
-	streetRegex,
-	stringRegex,
-} from "../Functions/FormValidator";
 import ReactSelect from "react-select";
 import Modal from "modal-p14-olivier";
+import Date from "./Date";
+import store from "../app/store";
+import { ADD_EMPLOYEE } from "../features/addEmployeesSlice";
+import Input from "./Input";
+import { displayModal } from "../Functions/DisplayModal";
+
+const stringRegex = /^[A-Za-z]+$/;
+const numberRegex = /^[0-9]+$/;
+const streetRegex = /^[0-9a-zA-Z_]+$/;
 
 /**
  * The form with each elements
@@ -18,6 +19,109 @@ import Modal from "modal-p14-olivier";
  */
 
 const Form = () => {
+	// States of all fields for received values
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [dateOfBirth, setDateOfBirth] = useState("");
+	const [startDate, setStartDate] = useState("");
+	const [street, setStreet] = useState("");
+	const [city, setCity] = useState("");
+	const [statesSelect, setStatesSelect] = useState("");
+	const [zipCode, setZipCode] = useState("");
+	const [departmentsSelect, setDepartments] = useState("");
+
+	// All error states
+	const [firstNameErr, setFirstNameErr] = useState(false);
+	const [lastNameErr, setLastNameErr] = useState(false);
+	const [dateOfBirthErr, setDateOfBirthErr] = useState(false);
+	const [startDateErr, setStartDateErr] = useState(false);
+	const [streetErr, setStreetErr] = useState(false);
+	const [cityErr, setCityErr] = useState(false);
+	const [statesErr, setStatesErr] = useState(false);
+	const [zipCodeErr, setZipCodeErr] = useState(false);
+	const [departmentsErr, setDepartmentsErr] = useState(false);
+
+	/**
+	 * handleSubmit checks if all fields are valid or not to add the errors
+	 * Then if the fields are correct, handleSubmit dispatch all the values in the states to create a new employee and display the modal 
+	 */
+	const handleSubmit = () => {
+		if (!stringRegex.test(firstName)) {
+			setFirstNameErr(true);
+		}
+		if (!stringRegex.test(lastName)) {
+			setLastNameErr(true);
+		}
+		if (dateOfBirth) {
+			if (dateOfBirth === "") {
+				setDateOfBirthErr(true);
+			} else {
+				setDateOfBirthErr(false);
+			}
+		} else {
+			setDateOfBirthErr(true);
+		}
+		if (startDate) {
+			if (startDate === "") {
+				setStartDateErr(true);
+			} else {
+				setStartDateErr(false);
+			}
+		} else {
+			setStartDateErr(true);
+		}
+		if (city === "") {
+			setCityErr(true);
+		}
+		if (statesSelect === "") {
+			setStatesErr(true);
+		} else {
+			setStatesErr(false);
+		}
+		if (!numberRegex.test(zipCode)) {
+			setZipCodeErr(true);
+		}
+		if (departmentsSelect === "") {
+			setDepartmentsErr(true);
+		} else {
+			setDepartmentsErr(false);
+		}
+		if (!streetRegex.test(street)) {
+			setStreetErr(true);
+		}
+
+		if (
+			stringRegex.test(firstName) &&
+			stringRegex.test(lastName) &&
+			streetRegex.test(street) &&
+			stringRegex.test(city) &&
+			numberRegex.test(zipCode) &&
+			statesSelect !== "" &&
+			departmentsSelect !== "" &&
+			dateOfBirth !== "" &&
+			startDate !== ""
+		) {
+			store.dispatch(
+				ADD_EMPLOYEE([
+					{
+						firstName,
+						lastName,
+						startDate: document.querySelector("#start-date").value,
+						street,
+						state: statesSelect,
+						city,
+						zipCode,
+						dateOfBirth: document.querySelector("#date-of-birth").value,
+						department: departmentsSelect,
+					},
+				])
+			);
+
+			displayModal();
+		}
+	};
+
+
 	useEffect(() => {
 		document.querySelector(".modal-close-icon").addEventListener("click", () => {
 			document.querySelector(".background-modal").style.display = "none";
@@ -29,59 +133,67 @@ const Form = () => {
 				<div className="inputs-block">
 					<fieldset className="main-informations">
 						<legend>Main Informations</legend>
-
 						<Input
 							id="first-name"
-							label="First Name"
 							type="text"
+							label="First Name"
 							regex={stringRegex}
+							labelErr={firstNameErr}
+							setLabelErr={setFirstNameErr}
+							setLabel={setFirstName}
 						/>
-						<span className="first-name-error error">
-							Please, enter your first name
-						</span>
-
-						<Input id="last-name" label="Last Name" type="text" regex={stringRegex} />
-						<span className="last-name-error error">
-							Please, enter your last name
-						</span>
-
-						<label htmlFor="date-of-birth">Date of birth</label>
+						<Input
+							id="last-name"
+							type="text"
+							label="Last Name"
+							regex={stringRegex}
+							labelErr={lastNameErr}
+							setLabelErr={setLastNameErr}
+							setLabel={setLastName}
+						/>
 						<Date
-							className="date-of-birth"
+							label={"Date of birth"}
 							id="date-of-birth"
-							label="Date of birth"
-							state="dateOfBirth"
+							setLabel={setDateOfBirth}
+							labelErr={dateOfBirthErr}
+							state={dateOfBirth}
+							setLabelErr={setDateOfBirthErr}
 						/>
-						<span className="date-of-birth-error error">
-							Please, enter your date of birth
-						</span>
-
-						<label htmlFor="start-date">Start Date</label>
 						<Date
-							className="start-date"
+							label={"Start date"}
 							id="start-date"
-							label="Start Date"
-							state="startDate"
+							setLabel={setStartDate}
+							labelErr={startDateErr}
+							state={startDate}
+							setLabelErr={setStartDateErr}
 						/>
-						<span className="start-date-error error">
-							Please, enter your start date
-						</span>
 					</fieldset>
-
 					<fieldset className="address">
 						<legend>Address</legend>
-
-						<Input id="street" label="Street" type="text" regex={streetRegex} />
-						<span className="street-error error">Please, enter your street</span>
-
-						<Input id="city" label="City" type="text" regex={stringRegex} />
-						<span className="city-error error">Please, enter your city</span>
+						<Input
+							id="street"
+							label="Street"
+							type="text"
+							regex={streetRegex}
+							labelErr={streetErr}
+							setLabelErr={setStreetErr}
+							setLabel={setStreet}
+						/>
+						<Input
+							id="city"
+							label="City"
+							type="text"
+							regex={stringRegex}
+							labelErr={cityErr}
+							setLabelErr={setCityErr}
+							setLabel={setCity}
+						/>
 
 						<label htmlFor="states">States</label>
 						<ReactSelect
 							id="states"
-							placeholder='States'
 							options={states}
+							onChange={(e) => setStatesSelect(e.abbreviation)}
 							className="react-select-container"
 							classNamePrefix="react-select"
 							theme={(theme) => ({
@@ -94,14 +206,23 @@ const Form = () => {
 								},
 							})}
 						/>
-						<span className="states-error error">Please, select your states</span>
-
-						<Input id="zip-code" label="Zip Code" type="number" regex={numberRegex} />
-						<span className="zip-code-error error">Please, enter your zip code</span>
-
+						<span
+							style={statesErr ? { display: "block" } : { display: "none" }}
+							className="error"
+						>
+							Please, enter your state
+						</span>
+						<Input
+							id="zip-code"
+							label="Zip code"
+							type="number"
+							regex={numberRegex}
+							labelErr={zipCodeErr}
+							setLabelErr={setZipCodeErr}
+							setLabel={setZipCode}
+						/>
 					</fieldset>
 				</div>
-				
 				<label htmlFor="departments" className="label-dp">
 					Departments
 				</label>
@@ -112,6 +233,7 @@ const Form = () => {
 					id="departments"
 					menuPlacement="top"
 					options={departments}
+					onChange={(e) => setDepartments(e.value)}
 					theme={(theme) => ({
 						...theme,
 						borderRadius: 7,
@@ -122,14 +244,19 @@ const Form = () => {
 						},
 					})}
 				/>
-				<span className="departments-error error label-dp">
-					Please, select your departments
+				<span
+					style={
+						departmentsErr
+							? { display: "block", textAlign: "center" }
+							: { display: "none" }
+					}
+					className="error"
+				>
+					Please, enter your department
 				</span>
-
 			</form>
-			{/** The modal display = none */}
-			<Modal content="Employee created" /> 
-			<button className="submit" onClick={() => formValidator()}>
+			<Modal content="Employee created!" />
+			<button className="submit" onClick={() => handleSubmit()}>
 				Save
 			</button>
 		</div>
