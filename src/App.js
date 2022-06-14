@@ -5,7 +5,7 @@ import NotFound from "./Pages/NotFound";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" exact element={<CreateEmployee />} />
         <Route path="/*" exact element={<NotFound />} />

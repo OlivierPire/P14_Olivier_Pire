@@ -18,7 +18,6 @@ body {
     margin: 0 auto;
     font-family: 'Roboto', sans-serif;
     color: $color-1;
-    
 }
 
 li {
@@ -63,4 +62,14 @@ a {
         box-shadow: none;
     }
     
+}
+
+@media screen and (max-width:680px) {
+    body {
+        color: $color-3;
+    }
+
+    a {
+        color: $color-3;
+    }
 }

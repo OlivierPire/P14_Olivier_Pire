@@ -1,5 +1,4 @@
 import React from "react";
-import { persistor } from "../app/store";
 import { changeBackground } from "../Functions/ChangeBackground";
 import "../Styles/index.scss";
 import Form from "../Components/Form";
@@ -11,7 +10,6 @@ import Header from "../Components/Header"
  */
 
 const CreateEmployee = () => {
-	// persistor.purge()
 
 	// I use window.innerWidth to change background color when the user window width is smaller than 681px
 	// I use it on page load and on resize with eventListener
